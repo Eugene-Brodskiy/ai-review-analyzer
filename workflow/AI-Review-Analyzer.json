@@ -1,0 +1,784 @@
+{
+  "name": "AI Review Analyzer",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        300
+      ],
+      "id": "13a705a0-5b2e-4b1f-bbd3-bfcf511f9fd2",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "YOUR_GOOGLE_SHEET_ID",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "products",
+          "mode": "name"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        220,
+        300
+      ],
+      "id": "98d82801-2f50-496e-8aad-f6612b3fe084",
+      "name": "Get Products"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "YOUR_GOOGLE_SHEET_ID",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "reviews",
+          "mode": "name"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        440,
+        300
+      ],
+      "id": "60380f8c-0a25-4df4-960c-bfdf7b1e444a",
+      "name": "Get Reviews",
+      "executeOnce": true
+    },
+    {
+      "parameters": {
+        "jsCode": "// One AI call per product: all of its reviews in one compact list (split if a product has more than 40).\nconst MAX_PER_BATCH = 40;\n\nconst products = $('Get Products').all().map(i => i.json);\nconst reviews = $input.all().map(i => i.json);\n\nconst batches = [];\nfor (const p of products) {\n  const own = reviews.filter(r => r.sku === p.sku);\n  for (let i = 0; i < own.length; i += MAX_PER_BATCH) {\n    const chunk = own.slice(i, i + MAX_PER_BATCH);\n    batches.push({\n      json: {\n        sku: p.sku,\n        product_name: p.product_name,\n        page_claims: p.page_claims,\n        review_count: chunk.length,\n        review_ids: chunk.map(r => r.review_id),\n        reviews_text: chunk.map(r => `${r.review_id} | ${r.rating}/5 | ${r.title} | ${r.text}`).join('\\n'),\n      },\n    });\n  }\n}\nreturn batches;\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        660,
+        300
+      ],
+      "id": "f475fe76-e191-4d76-85fd-bc93073d97d4",
+      "name": "Build Batches"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=You analyze customer reviews for an online pet store.\n\nProduct: {{ $json.product_name }} ({{ $json.sku }})\nWhat the product page currently says: {{ $json.page_claims }}\n\nReviews (id | rating | title | text):\n{{ $json.reviews_text }}\n\nFor EVERY review above return one object:\n- review_id: exactly as given\n- sentiment: positive, mixed or negative\n- themes: the separate topics the review mentions, each with\n  - theme: one value from the theme list below\n  - polarity: positive, negative or neutral\n  - detail: the concrete point in plain English, max 8 words\n- quote: the most telling phrase from the review, copied word for word, max 15 words\n\nTheme list (use only these values):\n- sizing_fit: size, fit, too small or too large, size chart. NOT shrinking after a wash.\n- comfort: comfort for the pet or the owner. NOT size problems.\n- build_quality: defects or flimsy parts out of the box, stability, wobbling, jamming\n- durability: breaks, splits or wears out AFTER some use (zippers, seams, straps, chewing)\n- cleaning_washing: cleaning, washing, and anything that happens after a wash (shrinking, fading)\n- dust: dust coming from the product\n- smell: smell or scent of the product itself\n- odor_control: how well the product controls pet odour\n- clumping: how litter clumps\n- ease_of_use: setup, putting on, daily handling\n- app_connectivity: app, Wi-Fi, connection, pairing, notifications\n- noise: sounds the product makes\n- pet_acceptance: whether the pet likes or uses it\n- health_effect: effects on the pet's health, digestion, skin or coat\n- value_for_money: price and value\n- delivery: delivery SPEED only\n- packaging: torn, split, punctured or damaged bag or box on arrival, even if the review mentions delivery\n- description_accuracy: colour, material or features differ from the page. NOT size, washing or dust: use those themes.\n- other: anything else\n\nRules:\n1. Return all {{ $json.review_count }} reviews, in the same order. Never skip a review, never invent one.\n2. One complaint = ONE theme: pick the most specific one. Add a second theme only for a separate topic (for example \"comfy straps, but the zipper broke\" = comfort positive + durability negative).\n3. A 5-star review can still contain a negative theme. Sarcasm counts as negative.\n4. Use neutral for plain facts without praise or complaint.\n5. Use only what the review says. Do not guess.\n\nReturn only the JSON object.",
+        "hasOutputParser": true,
+        "batching": {
+          "batchSize": 1,
+          "delayBetweenBatches": 4000
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.9,
+      "position": [
+        880,
+        300
+      ],
+      "id": "2ee72445-9721-4732-882b-9bc7df2e7e0a",
+      "name": "AI Tagger",
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 5000
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-3.5-flash-lite",
+        "options": {
+          "maxOutputTokens": 8192,
+          "temperature": 0
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1.2,
+      "position": [
+        860,
+        520
+      ],
+      "id": "2a0c5bcb-5719-4450-bd0f-79733dee9c32",
+      "name": "Gemini Tagger Model"
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n  \"reviews\": [\n    {\n      \"review_id\": \"R001\",\n      \"sentiment\": \"mixed\",\n      \"themes\": [\n        {\n          \"theme\": \"noise\",\n          \"polarity\": \"negative\",\n          \"detail\": \"pump hums loudly at night\"\n        },\n        {\n          \"theme\": \"pet_acceptance\",\n          \"polarity\": \"positive\",\n          \"detail\": \"cat drinks more water\"\n        }\n      ],\n      \"quote\": \"she drinks way more now, but the hum keeps me awake\"\n    }\n  ]\n}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        1020,
+        520
+      ],
+      "id": "765ce9cc-fd17-4f8c-b201-77efd755205b",
+      "name": "Tagger Output Parser"
+    },
+    {
+      "parameters": {
+        "jsCode": "// One row per review. Checks that the AI returned every review once and used only allowed themes.\nconst THEMES = new Set([\n  'sizing_fit', 'comfort', 'build_quality', 'durability', 'cleaning_washing', 'dust', 'smell',\n  'odor_control', 'clumping', 'ease_of_use', 'app_connectivity', 'noise', 'pet_acceptance',\n  'health_effect', 'value_for_money', 'delivery', 'packaging', 'description_accuracy', 'other',\n]);\nconst POLARITY = new Set(['positive', 'negative', 'neutral']);\nconst clean = s => String(s ?? '').trim().toLowerCase();\n\n// A broken AI answer must not crash the run: that batch's reviews just come out as \"missing\".\nconst parse = o => {\n  try { return (typeof o === 'string' ? JSON.parse(o) : o) ?? {}; } catch (e) { return {}; }\n};\nconst batches = $('Build Batches').all().map(i => i.json);\nconst reviews = Object.fromEntries($('Get Reviews').all().map(i => [i.json.review_id, i.json]));\n\nconst rows = [];\n$input.all().forEach((item, idx) => {\n  const batch = batches[idx];\n  const answer = parse(item.json.output ?? item.json);\n  const tagged = Array.isArray(answer.reviews) ? answer.reviews.filter(Boolean) : [];\n  const byId = Object.fromEntries(tagged.map(t => [String(t.review_id).trim().toUpperCase(), t]));\n\n  for (const id of batch.review_ids) {\n    const r = reviews[id];\n    const t = byId[id];\n    const themes = (Array.isArray(t?.themes) ? t.themes.filter(Boolean) : []).map(th => ({\n      theme: THEMES.has(clean(th.theme)) ? clean(th.theme) : 'other',\n      // An unclear polarity is not counted as a complaint.\n      polarity: POLARITY.has(clean(th.polarity)) ? clean(th.polarity) : 'neutral',\n      detail: String(th.detail ?? '').replace(/\\|/g, '/').trim(),\n    }));\n    rows.push({\n      json: {\n        review_id: id,\n        sku: r.sku,\n        rating: Number(r.rating),\n        sentiment: t?.sentiment ?? '',\n        themes: themes.map(x => `${x.theme}:${x.polarity}`).join(' | '),\n        details: themes.map(x => x.detail).join(' | '),\n        quote: t?.quote ?? '',\n        tag_status: t ? 'ok' : 'missing',\n      },\n    });\n  }\n});\nreturn rows;\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1240,
+        300
+      ],
+      "id": "38b20b4a-68b2-4657-9861-aad2c374abe9",
+      "name": "Flatten Tags"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "YOUR_GOOGLE_SHEET_ID",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "tagged",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "review_id",
+              "displayName": "review_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "sku",
+              "displayName": "sku",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "rating",
+              "displayName": "rating",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "sentiment",
+              "displayName": "sentiment",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "themes",
+              "displayName": "themes",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "details",
+              "displayName": "details",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "quote",
+              "displayName": "quote",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "tag_status",
+              "displayName": "tag_status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1460,
+        120
+      ],
+      "id": "9872fa3c-a5a7-4881-883a-927a7c094f2d",
+      "name": "Save Tagged"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Code does the counting, not the AI: mentions per product × theme, and which ones are real issues.\nconst MIN_MENTIONS = 4;   // a top issue needs at least 4 reviews...\nconst MIN_SHARE = 0.10;   // ...and at least 10% of that product's reviews\n\nconst products = Object.fromEntries($('Get Products').all().map(i => [i.json.sku, i.json]));\nconst rows = $input.all().map(i => i.json);\n\nconst total = {};\nconst groups = {};\nfor (const r of rows) {\n  total[r.sku] = (total[r.sku] ?? 0) + 1;\n  const themes = r.themes ? r.themes.split(' | ') : [];\n  const details = r.details ? r.details.split(' | ') : [];\n  themes.forEach((t, i) => {\n    const [theme, polarity] = t.split(':');\n    const key = `${r.sku}|${theme}|${polarity}`;\n    const g = (groups[key] ??= { sku: r.sku, theme, polarity, ids: [], ratings: [], details: [], quotes: [] });\n    if (g.ids.includes(r.review_id)) return; // a review counts once per theme\n    g.ids.push(r.review_id);\n    g.ratings.push(Number(r.rating));\n    if (details[i]) g.details.push(details[i]);\n    if (r.quote) g.quotes.push(r.quote);\n  });\n}\n\nconst unique = arr => [...new Set(arr.map(s => s.toLowerCase()))];\n\nreturn Object.values(groups)\n  .map(g => {\n    const share = g.ids.length / total[g.sku];\n    // 'other' is a catch-all of unrelated complaints, so it never counts as one issue.\n    const top = g.polarity === 'negative' && g.theme !== 'other' && g.ids.length >= MIN_MENTIONS && share >= MIN_SHARE;\n    return {\n      sku: g.sku,\n      product_name: products[g.sku]?.product_name ?? '',\n      theme: g.theme,\n      polarity: g.polarity,\n      mentions: g.ids.length,\n      reviews_total: total[g.sku],\n      share_pct: Math.round(share * 100),\n      avg_rating: Math.round((g.ratings.reduce((a, b) => a + b, 0) / g.ratings.length) * 10) / 10,\n      top_issue: top ? 'yes' : 'no',\n      example_details: unique(g.details).slice(0, 4).join(' | '),\n      example_quotes: g.quotes.slice(0, 3).map(q => q.replace(/\\|/g, '/')).join(' | '),\n      review_ids: g.ids.join(' '),\n    };\n  })\n  .sort((a, b) => a.sku.localeCompare(b.sku) || (a.top_issue === 'yes' ? -1 : 0) - (b.top_issue === 'yes' ? -1 : 0) || b.mentions - a.mentions)\n  .map(json => ({ json }));\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1460,
+        400
+      ],
+      "id": "93a6579c-44a9-4f36-8830-4bb713957fa9",
+      "name": "Aggregate"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "YOUR_GOOGLE_SHEET_ID",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "insights",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "sku",
+              "displayName": "sku",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "product_name",
+              "displayName": "product_name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "theme",
+              "displayName": "theme",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "polarity",
+              "displayName": "polarity",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "mentions",
+              "displayName": "mentions",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "reviews_total",
+              "displayName": "reviews_total",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "share_pct",
+              "displayName": "share_pct",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "avg_rating",
+              "displayName": "avg_rating",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "top_issue",
+              "displayName": "top_issue",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "example_details",
+              "displayName": "example_details",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "example_quotes",
+              "displayName": "example_quotes",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "review_ids",
+              "displayName": "review_ids",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1680,
+        220
+      ],
+      "id": "23571a24-852e-4c9a-a1e3-38ed24ac95de",
+      "name": "Save Insights"
+    },
+    {
+      "parameters": {
+        "jsCode": "// One item for the AI Advisor: the top issues found by code, plus what customers praise most.\nconst MAX_HIGHLIGHTS_PER_PRODUCT = 1;\nconst MIN_PRAISE_MENTIONS = 5;\n// Themes that make useful product-page copy (not delivery speed, price or \"other\").\nconst COPY_THEMES = new Set([\n  'sizing_fit', 'comfort', 'build_quality', 'durability', 'cleaning_washing', 'odor_control', 'clumping',\n  'ease_of_use', 'app_connectivity', 'noise', 'pet_acceptance', 'health_effect',\n]);\n\nconst products = Object.fromEntries($('Get Products').all().map(i => [i.json.sku, i.json]));\nconst insights = $input.all().map(i => i.json);\n\nconst issues = insights\n  .filter(r => r.top_issue === 'yes')\n  .map((r, i) => ({ ...r, issue_id: `ISSUE ${i + 1}`, page_claims: products[r.sku]?.page_claims ?? '' }));\n\nconst highlights = [];\nfor (const sku of Object.keys(products)) {\n  insights\n    .filter(r => r.sku === sku && r.polarity === 'positive' && r.mentions >= MIN_PRAISE_MENTIONS && COPY_THEMES.has(r.theme))\n    // Don't praise what is also a top issue for the same product.\n    .filter(r => !issues.some(i => i.sku === sku && i.theme === r.theme))\n    .sort((a, b) => b.mentions - a.mentions)\n    .slice(0, MAX_HIGHLIGHTS_PER_PRODUCT)\n    .forEach(r => highlights.push(r));\n}\n\nconst issueLine = r =>\n  `${r.issue_id} | ${r.sku} | ${r.product_name} | theme: ${r.theme} | ${r.mentions} of ${r.reviews_total} reviews (${r.share_pct}%), avg rating ${r.avg_rating} | what customers say: ${r.example_details} | quotes: ${r.example_quotes} | product page says: ${r.page_claims}`;\nconst praiseLine = r =>\n  `${r.sku} | ${r.product_name} | theme: ${r.theme} | ${r.mentions} of ${r.reviews_total} reviews | what customers say: ${r.example_details}`;\n\nreturn [{\n  json: {\n    issue_count: issues.length,\n    issues,\n    issues_text: issues.map(issueLine).join('\\n') || 'none',\n    highlights_text: highlights.map(praiseLine).join('\\n') || 'none',\n  },\n}];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1680,
+        520
+      ],
+      "id": "f8ecd5c1-e5da-4ccf-b787-0f073e216d8d",
+      "name": "Build Advisor Input"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=You are an e-commerce consultant for an online pet store.\nBelow are problems found in customer reviews. Code has already counted them, so the numbers are correct.\n\nProblems (one per line):\n{{ $json.issues_text }}\n\nWhat customers praise most (one per line):\n{{ $json.highlights_text }}\n\nFor EACH problem return one action:\n- issue_id: exactly as given (ISSUE 1, ISSUE 2, ...)\n- summary: the problem in one plain sentence\n- page_fix: the exact change to make on the product page, max 40 words. If reviews contradict a claim on the page, name that claim and say how to correct it.\n- product_or_ops_fix: what to change in the product, with the supplier or in logistics, max 30 words\n- priority: high, medium or low. High = a page claim is contradicted, or many mentions with a low average rating.\n\nThen for EACH praise line return one highlight:\n- sku: exactly as given\n- copy_suggestion: one bullet point for the product page based on what customers praise, max 15 words, no hype words\n\nRules:\n1. Use only the facts given above. Never invent numbers, materials, certificates or features.\n2. Write for a store owner: short, concrete, no marketing language.\n\nReturn only the JSON object.",
+        "hasOutputParser": true,
+        "batching": {
+          "batchSize": 1,
+          "delayBetweenBatches": 0
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.9,
+      "position": [
+        1900,
+        520
+      ],
+      "id": "d17eb822-290b-48d4-9a20-cd057bd5e6c0",
+      "name": "AI Advisor",
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 5000
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-3.5-flash-lite",
+        "options": {
+          "maxOutputTokens": 8192,
+          "temperature": 0
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1.2,
+      "position": [
+        1880,
+        740
+      ],
+      "id": "5d76dc62-1cf3-4a02-9036-706b64352613",
+      "name": "Gemini Advisor Model"
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n  \"actions\": [\n    {\n      \"issue_id\": \"ISSUE 1\",\n      \"summary\": \"The water fountain pump is loud at night.\",\n      \"page_fix\": \"Replace the claim 'whisper-quiet' with the real noise level and add a tip to place it away from bedrooms.\",\n      \"product_or_ops_fix\": \"Ask the supplier for a quieter pump or test a batch for noise before shipping.\",\n      \"priority\": \"medium\"\n    }\n  ],\n  \"highlights\": [\n    {\n      \"sku\": \"PS-XXX-000\",\n      \"copy_suggestion\": \"Cats drink more thanks to the moving water\"\n    }\n  ]\n}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        2040,
+        740
+      ],
+      "id": "62f9e16a-3c31-4023-81cc-2a0b23394649",
+      "name": "Advisor Output Parser"
+    },
+    {
+      "parameters": {
+        "jsCode": "// One sheet row per action: fixes for each top issue, then copy ideas from what customers praise.\nconst PRIORITY = { high: 1, medium: 2, low: 3 };\n\nconst parse = o => (typeof o === 'string' ? JSON.parse(o) : o);\nconst input = $('Build Advisor Input').first().json;\nconst products = Object.fromEntries($('Get Products').all().map(i => [i.json.sku, i.json]));\nconst advice = parse($input.first().json.output ?? $input.first().json);\n\nconst issues = Object.fromEntries(input.issues.map(r => [r.issue_id, r]));\n\nconst fixes = (advice.actions ?? [])\n  .filter(a => issues[a.issue_id]) // ignore anything the AI invented\n  .map(a => {\n    const r = issues[a.issue_id];\n    return {\n      type: 'fix',\n      priority: PRIORITY[a.priority] ? a.priority : 'medium',\n      sku: r.sku,\n      product_name: r.product_name,\n      theme: r.theme,\n      evidence: `${r.mentions} of ${r.reviews_total} reviews (${r.share_pct}%), avg rating ${r.avg_rating}`,\n      summary: a.summary,\n      page_fix: a.page_fix,\n      product_or_ops_fix: a.product_or_ops_fix,\n    };\n  })\n  .sort((a, b) => PRIORITY[a.priority] - PRIORITY[b.priority]);\n\nconst highlights = (advice.highlights ?? [])\n  .filter(h => products[h.sku])\n  .map(h => ({\n    type: 'highlight',\n    priority: 'low',\n    sku: h.sku,\n    product_name: products[h.sku].product_name,\n    theme: '',\n    evidence: '',\n    summary: 'What customers praise most',\n    page_fix: String(h.copy_suggestion ?? '').replace(/^\\s*[-•*]\\s*/, ''), // the model sometimes adds a bullet\n    product_or_ops_fix: '',\n  }));\n\n// An issue the AI skipped still gets a row, so nothing found by code silently disappears.\nconst skipped = input.issues\n  .filter(r => !fixes.some(f => f.sku === r.sku && f.theme === r.theme))\n  .map(r => ({\n    type: 'fix',\n    priority: 'high',\n    sku: r.sku,\n    product_name: r.product_name,\n    theme: r.theme,\n    evidence: `${r.mentions} of ${r.reviews_total} reviews (${r.share_pct}%), avg rating ${r.avg_rating}`,\n    summary: `Not analysed by the AI Advisor. What customers say: ${r.example_details}`,\n    page_fix: '',\n    product_or_ops_fix: '',\n  }));\n\nreturn [...fixes, ...skipped, ...highlights].map(json => ({ json }));\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2260,
+        520
+      ],
+      "id": "67b21510-4e09-4b40-bc40-a6d518243a60",
+      "name": "Flatten Actions"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "YOUR_GOOGLE_SHEET_ID",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "actions",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "type",
+              "displayName": "type",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "priority",
+              "displayName": "priority",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "sku",
+              "displayName": "sku",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "product_name",
+              "displayName": "product_name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "theme",
+              "displayName": "theme",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "evidence",
+              "displayName": "evidence",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "summary",
+              "displayName": "summary",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "page_fix",
+              "displayName": "page_fix",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "product_or_ops_fix",
+              "displayName": "product_or_ops_fix",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        2480,
+        520
+      ],
+      "id": "4d88b88a-7a0e-4882-a4ff-15671ca5f2aa",
+      "name": "Save Actions"
+    }
+  ],
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Get Products",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Products": {
+      "main": [
+        [
+          {
+            "node": "Get Reviews",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Reviews": {
+      "main": [
+        [
+          {
+            "node": "Build Batches",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Batches": {
+      "main": [
+        [
+          {
+            "node": "AI Tagger",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Tagger": {
+      "main": [
+        [
+          {
+            "node": "Flatten Tags",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Flatten Tags": {
+      "main": [
+        [
+          {
+            "node": "Save Tagged",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Aggregate",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate": {
+      "main": [
+        [
+          {
+            "node": "Save Insights",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Build Advisor Input",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Advisor Input": {
+      "main": [
+        [
+          {
+            "node": "AI Advisor",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Advisor": {
+      "main": [
+        [
+          {
+            "node": "Flatten Actions",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Flatten Actions": {
+      "main": [
+        [
+          {
+            "node": "Save Actions",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gemini Tagger Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Tagger",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Tagger Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "AI Tagger",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gemini Advisor Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Advisor",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Advisor Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "AI Advisor",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  }
+}
