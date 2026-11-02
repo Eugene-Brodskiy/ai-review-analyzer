@@ -1,0 +1,23 @@
+﻿== Planted issues: found as a top issue? ==
+I1 FOUND  PS-HAR-001 Harness runs small: the size chart is off by about one size | planted reviews tagged correctly: 8/9
+I2 FOUND  PS-BED-002 Bed cover shrinks after washing at 30 °C as instructed | planted reviews tagged correctly: 6/6
+I3 FOUND  PS-LIT-003 Litter is dusty when pouring, despite the '99% dust-free' claim | planted reviews tagged correctly: 8/8
+I4 FOUND  PS-FED-004 Feeder loses Wi-Fi / goes offline in the app | planted reviews tagged correctly: 8/8
+I5 FOUND  PS-CAR-005 Carrier zipper splits or comes off the track | planted reviews tagged correctly: 7/7
+I6 FOUND  PS-FOD-007 Food bag arrives torn or punctured | planted reviews tagged correctly: 6/6
+
+== Traps (should NOT be top issues) ==
+T1 ok          Scratching post wobbles (2 reviews)
+T2 ok          Toy destroyed by a strong chewer (2 reviews)
+T3 ok          Feeder motor is loud (2 reviews)
+T4 ok          Litter scent too strong (2 reviews)
+T5 ok          Carrier too small for a big cat (2 reviews)
+T6 ok          Large kibble jams the feeder (2 reviews)
+T7 ok          Dog not interested in the toy (2 reviews)
+
+== Summary ==
+Planted issues found: 6 of 6
+Planted complaints tagged correctly: 43 of 44
+Traps raised as issues: 0 of 7
+Other top issues not planted: 0 []
+Reviews the AI skipped: 0 of 250
