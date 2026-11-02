@@ -1,0 +1,251 @@
+review_id,sku,date,rating,title,text
+R001,PS-FOD-007,2026-03-01,3,Expensive,"Good food, but too expensive for a big dog."
+R002,PS-SCR-008,2026-03-01,5,Cat stopped scratching the sofa,Within a week she switched to the post.
+R003,PS-BED-002,2026-03-02,1,Machine washable? Not really,The page says machine washable. It came out smaller and now the foam bunches up at the corners.
+R004,PS-TOY-006,2026-03-03,4,Solid,Well made.
+R005,PS-SCR-008,2026-03-05,5,Cats love it,Both cats use it daily.
+R006,PS-HAR-001,2026-03-07,5,Light and breathable,"Good for summer, he doesn't overheat in it."
+R007,PS-HAR-001,2026-03-07,4,"Love it, but order a size up","Super comfy padding and the front clip really works. Only thing: the chart is off, my beagle needed L, not M."
+R008,PS-HAR-001,2026-03-08,5,Handle on the back is useful,The handle helps a lot when I lift him into the car.
+R009,PS-FED-004,2026-03-09,5,Fast delivery,Arrived in two days.
+R010,PS-HAR-001,2026-03-09,3,Slow delivery,Took 9 days instead of 3. The harness itself is ok.
+R011,PS-BED-002,2026-03-12,5,Worth it,Should have bought it years ago.
+R012,PS-LIT-003,2026-03-12,3,Strong perfume,my cat hesitated to use the box the first day because of the scent
+R013,PS-TOY-006,2026-03-13,2,Not for power chewers,"Pieces came off within a week, I took it away."
+R014,PS-FED-004,2026-03-15,5,Recommended,Would buy again.
+R015,PS-SCR-008,2026-03-15,4,Good value,Fair price.
+R016,PS-FED-004,2026-03-17,3,Jams with bigger kibble,Works with small kibble only.
+R017,PS-TOY-006,2026-03-17,4,Keeps her busy,Good for rainy days.
+R018,PS-LIT-003,2026-03-18,3,Scent too strong,"The perfume is very strong, I'd prefer an unscented version."
+R019,PS-SCR-008,2026-03-18,4,Does the job,Simple and effective.
+R020,PS-FED-004,2026-03-19,3,"Schedule ok, connection bad","The schedule still runs, but I can't check from work if the cat ate because it shows offline."
+R021,PS-LIT-003,2026-03-21,4,Good price,Cheaper than the supermarket brand.
+R022,PS-LIT-003,2026-03-21,2,So much dust,A grey cloud every time I pour it. I have to open the window. So much for 99% dust-free.
+R023,PS-SCR-008,2026-03-21,5,Quick delivery,Two days.
+R024,PS-SCR-008,2026-03-22,5,Love it,Great post.
+R025,PS-HAR-001,2026-03-23,4,Good value,Cheaper than the brand at our local pet shop and works just as well.
+R026,PS-BED-002,2026-03-24,4,"Comfortable, a bit firm",Took him two nights to get used to it.
+R027,PS-HAR-001,2026-03-24,4,Does the job,"Simple, works, no complaints so far."
+R028,PS-TOY-006,2026-03-24,5,Treat slot keeps him busy,Fill it with kibble and he's quiet for half an hour.
+R029,PS-BED-002,2026-03-25,5,Keeps its shape,"Three months in, no dents."
+R030,PS-LIT-003,2026-03-26,5,Box stays fresh,Love it.
+R031,PS-BED-002,2026-03-27,5,Dog won't leave it,He ignores the sofa now.
+R032,PS-HAR-001,2026-03-27,5,No more pulling,The front clip changed our walks. She used to drag me to every tree.
+R033,PS-FOD-007,2026-03-28,5,Itching stopped,Two weeks and no more scratching.
+R034,PS-FOD-007,2026-03-29,4,"Good food, damaged bag",Shiny coat after a month. The bag had a hole when it arrived though.
+R035,PS-HAR-001,2026-03-29,3,"Good harness, wrong size chart",Quality is fine and he doesn't pull as much. But the M fits like an S. Size up.
+R036,PS-SCR-008,2026-03-29,5,Saved my couch,Finally.
+R037,PS-TOY-006,2026-03-29,3,Not interested,She sniffed it once and went back to her old ball.
+R038,PS-TOY-006,2026-03-30,4,Good for medium dogs,"Too big for small dogs, perfect for ours."
+R039,PS-BED-002,2026-04-01,5,Great foam,Dense and comfortable.
+R040,PS-CAR-005,2026-04-05,5,Comfortable for both of us,My back and the cat are both happy.
+R041,PS-CAR-005,2026-04-05,5,Easy to clean,"Wipe-clean inside, removable mat."
+R042,PS-HAR-001,2026-04-05,4,Second one fits,"First one (M) was too snug, exchanged it for L without problems. The L is great, and the reflective strips are bright at night."
+R043,PS-CAR-005,2026-04-06,3,Snug for large cats,Our big tom has to curl up tight in it.
+R044,PS-BED-002,2026-04-09,5,Non-slip bottom,Doesn't slide on our wooden floor at all.
+R045,PS-FOD-007,2026-04-09,5,Clean ingredients,No fillers.
+R046,PS-TOY-006,2026-04-09,3,Rubber smell,Strong rubber smell at first.
+R047,PS-BED-002,2026-04-10,5,Our senior dog loves it,"11 years old with stiff hips, he gets up much easier in the morning."
+R048,PS-FOD-007,2026-04-10,5,Shiny coat,Visible difference after three weeks.
+R049,PS-TOY-006,2026-04-10,5,Great for a teething puppy,Soothes her gums.
+R050,PS-FED-004,2026-04-11,4,Battery backup saved us,Power cut for 3 hours and it still fed the cat on time.
+R051,PS-FOD-007,2026-04-11,5,Great,Recommended.
+R052,PS-LIT-003,2026-04-11,2,Bag arrived split,The bag was torn and litter spilled in the box.
+R053,PS-FED-004,2026-04-13,2,2.4 GHz and still drops,Set it up on 2.4 GHz like the manual says. Still loses connection overnight.
+R054,PS-FOD-007,2026-04-15,5,Good kibble size,Easy to chew for our older dog.
+R055,PS-LIT-003,2026-04-19,4,Low tracking,Much less litter on the floor than our old one.
+R056,PS-FOD-007,2026-04-20,3,Delivery took long,"Food is good, delivery took 8 days."
+R057,PS-HAR-001,2026-04-20,5,Easy to clean,"Hand washed it after a muddy walk, dry by the morning."
+R058,PS-LIT-003,2026-04-23,5,Cat approved,She uses it without any fuss.
+R059,PS-CAR-005,2026-04-24,3,Needs a better zip,"Love the design, but the zipper feels cheap and already started splitting."
+R060,PS-CAR-005,2026-04-24,2,Zipper broke in a month,The main zipper split after about 4 weeks of vet trips.
+R061,PS-BED-002,2026-04-25,5,Best purchase for my arthritic dog,She limps less in the mornings since we got it.
+R062,PS-HAR-001,2026-04-25,5,Bought a second one,Got one for each of our dogs. Both are happy.
+R063,PS-CAR-005,2026-04-26,4,Good,Happy with it.
+R064,PS-FED-004,2026-04-26,5,Cat adapted quickly,Took her one day.
+R065,PS-HAR-001,2026-04-26,5,Our second harness from this store,"Previous one lasted three years, so we bought this one."
+R066,PS-HAR-001,2026-04-27,2,"Great, if your dog is smaller than the chart says",Ordered S for my terrier. Fits our neighbour's chihuahua much better.
+R067,PS-FED-004,2026-04-28,5,Reliable feeding times,Meals come out exactly on schedule.
+R068,PS-LIT-003,2026-04-28,4,Bag is heavy,"Heavy to carry up the stairs, but that's expected for 10 L."
+R069,PS-HAR-001,2026-04-29,5,Great for hiking,"Used it on a 15 km hike, no chafing and the handle helped on rocks."
+R070,PS-LIT-003,2026-04-29,5,Switched from silica,Never going back.
+R071,PS-SCR-008,2026-05-01,5,Perfect,Cat uses it every morning.
+R072,PS-SCR-008,2026-05-01,5,Second one,Bought one for upstairs.
+R073,PS-FED-004,2026-05-02,5,Easy setup,Up and running in 10 minutes.
+R074,PS-HAR-001,2026-05-02,3,Tight around the chest,"Her chest is 62 cm, so the chart says M. The M barely closed. Went up to L and it's perfect now."
+R075,PS-CAR-005,2026-05-03,4,Sturdy base,Doesn't sag with the cat inside.
+R076,PS-TOY-006,2026-05-04,4,Nice,Good toy.
+R077,PS-BED-002,2026-05-07,5,Great support for big dogs,Our Great Dane finally has a bed that doesn't flatten.
+R078,PS-CAR-005,2026-05-07,5,Fit under the seat on our flight,No problems at the gate.
+R079,PS-CAR-005,2026-05-07,5,Love it,Cute and practical.
+R080,PS-FOD-007,2026-05-07,4,Dog likes it,Eats it without fuss.
+R081,PS-FED-004,2026-05-08,4,Good value,Cheaper than similar feeders.
+R082,PS-FED-004,2026-05-08,2,Keeps dropping Wi-Fi,The feeder disconnects from Wi-Fi every couple of days and the app shows it offline.
+R083,PS-FOD-007,2026-05-08,3,"Food great, packaging not",My dog loves it. Second order in a row where the bag was split on arrival.
+R084,PS-FED-004,2026-05-09,2,Kibble jammed,Large kibble jammed twice in the first week.
+R085,PS-HAR-001,2026-05-10,2,chart is wrong,followed the size chart exactly and it was way too small for my husky. exchange took 2 weeks
+R086,PS-BED-002,2026-05-11,2,Cover shrank after first wash,Washed it at 30 °C exactly as the label says. Now the zip won't close around the foam.
+R087,PS-BED-002,2026-05-11,5,Fits the crate perfectly,The L fits our large crate exactly.
+R088,PS-LIT-003,2026-05-11,4,Decent,Good litter for the price.
+R089,PS-LIT-003,2026-05-14,5,Great odour control,Even on day 3 no smell.
+R090,PS-FOD-007,2026-05-15,5,Picky eater loves it,First food he finishes every time.
+R091,PS-LIT-003,2026-05-15,2,My cat sneezes,Since switching to this litter my cat sneezes after using the box. Lots of fine dust.
+R092,PS-FOD-007,2026-05-16,5,Vet approved,Our vet liked the ingredient list.
+R093,PS-SCR-008,2026-05-18,5,Worth it,Cheaper than a new sofa.
+R094,PS-CAR-005,2026-05-20,2,Teeth separating,The zipper teeth separate behind the slider. Had to tie it shut with a cable tie.
+R095,PS-FED-004,2026-05-20,4,Does what it says,No surprises.
+R096,PS-SCR-008,2026-05-22,5,Easy assembly,"Five minutes, no tools."
+R097,PS-FED-004,2026-05-23,4,Good feeder,Solid and simple.
+R098,PS-BED-002,2026-05-26,5,Fast delivery,"Arrived next day, well packed."
+R099,PS-BED-002,2026-05-27,3,Smells of foam at first,"Chemical smell for the first 3 days, gone after airing it out."
+R100,PS-FOD-007,2026-05-27,3,Pack it better please,"The bag was punctured during delivery. Taped it up, but please use a stronger bag or an extra box."
+R101,PS-BED-002,2026-05-28,5,Two dogs share it,The XL fits both our beagles.
+R102,PS-LIT-003,2026-05-30,4,Good,No complaints.
+R103,PS-BED-002,2026-05-31,4,Nice colour,Grey fits our living room.
+R104,PS-CAR-005,2026-06-01,5,Bought a second one,One for each of our cats.
+R105,PS-LIT-003,2026-06-01,5,Clumps instantly,Scooping takes a minute a day now.
+R106,PS-SCR-008,2026-06-01,4,Nice,Looks good in the hallway.
+R107,PS-LIT-003,2026-06-02,5,Delivered fast,Two days.
+R108,PS-LIT-003,2026-06-03,5,Clumps and no odour,Exactly as described.
+R109,PS-FOD-007,2026-06-04,4,Fine,Does the job.
+R110,PS-BED-002,2026-06-05,4,"Good, delivery a bit slow","Bed is great, delivery took a week."
+R111,PS-BED-002,2026-06-06,5,Quality,"Well made, nice thick fabric."
+R112,PS-FED-004,2026-06-06,3,Noisy,The dispensing sound wakes me up at 6.
+R113,PS-LIT-003,2026-06-06,5,On subscription,Ordering every month now.
+R114,PS-TOY-006,2026-06-06,5,Bought three,One for each room.
+R115,PS-TOY-006,2026-06-07,5,Tough,No marks after a month.
+R116,PS-CAR-005,2026-06-10,5,Good ventilation,"Lots of air holes, she doesn't pant."
+R117,PS-CAR-005,2026-06-11,4,Nice colour,Looks better than in the photos.
+R118,PS-FED-004,2026-06-11,5,Peace of mind,Long work days are fine for the cat now.
+R119,PS-HAR-001,2026-06-16,4,Comfy for long walks,No marks after two hours of walking.
+R120,PS-BED-002,2026-06-17,4,Good support,Firm enough for our 35 kg shepherd.
+R121,PS-HAR-001,2026-06-17,2,Chewed through in a week,My puppy chewed the side strap in a week. Maybe not for chewers.
+R122,PS-TOY-006,2026-06-17,5,Easy to clean,Rinse and done.
+R123,PS-CAR-005,2026-06-18,5,Great,Exactly what we needed.
+R124,PS-FOD-007,2026-06-20,5,Better digestion,"Firmer stools since switching, no more itching."
+R125,PS-HAR-001,2026-06-23,5,Reactive dog is easier to manage,The back handle gives me control when he lunges.
+R126,PS-FOD-007,2026-06-25,4,Pricey but worth it,"Not cheap, but she's healthier."
+R127,PS-LIT-003,2026-06-25,5,Best litter,"Tried five brands, this one wins."
+R128,PS-BED-002,2026-06-26,4,Easy to carry,Light enough to move between rooms.
+R129,PS-CAR-005,2026-06-26,3,Too small for a big cat,My 7 kg Maine Coon barely fits.
+R130,PS-FED-004,2026-06-27,3,Motor is loud at night,The motor noise at 3 am wakes us up.
+R131,PS-TOY-006,2026-06-28,5,Great with peanut butter,Frozen with peanut butter it lasts ages.
+R132,PS-SCR-008,2026-07-03,5,Recommended,Would buy again.
+R133,PS-SCR-008,2026-07-04,4,Good quality,Sisal feels tight and strong.
+R134,PS-TOY-006,2026-07-05,5,Survived my lab,"Indestructible so far, 3 weeks of heavy chewing."
+R135,PS-CAR-005,2026-07-06,5,Cat is calm inside,She settles down as soon as we start walking.
+R136,PS-FOD-007,2026-07-07,5,Energy for a working dog,Our collie is full of energy.
+R137,PS-FOD-007,2026-07-08,4,Good food,Happy with it.
+R138,PS-FOD-007,2026-07-08,5,Healthy weight,He lost the extra kilos.
+R139,PS-HAR-001,2026-07-08,4,Buckles stiff at first,"The buckles were stiff for the first few days, fine now."
+R140,PS-CAR-005,2026-07-09,2,Smells of plastic,Strong plastic smell for the first week.
+R141,PS-SCR-008,2026-07-14,3,Sisal sheds,Bits of sisal everywhere after two weeks.
+R142,PS-TOY-006,2026-07-14,5,Durable,Still in one piece.
+R143,PS-FED-004,2026-07-15,5,No more 5 am wake-ups,"The cat waits for the feeder now, not for me."
+R144,PS-BED-002,2026-07-16,5,Sleeps through the night now,No more pacing at night.
+R145,PS-CAR-005,2026-07-16,4,Good quality for the price,Feels well made.
+R146,PS-TOY-006,2026-07-16,4,Does the job,Keeps him off the furniture.
+R147,PS-SCR-008,2026-07-17,3,A bit wobbly,Wobbles when my big cat jumps on it.
+R148,PS-HAR-001,2026-07-18,5,As described,"Everything as on the page, good quality."
+R149,PS-HAR-001,2026-07-18,5,Comfortable,"No rubbing under the legs, the padding is soft. He doesn't try to take it off."
+R150,PS-LIT-003,2026-07-20,3,"Clumps well, but dusty",Clumping and smell control are great. Pouring it is a dust storm though.
+R151,PS-TOY-006,2026-07-20,5,Perfect for fetch,Easy to throw far.
+R152,PS-FED-004,2026-07-21,4,Easy to clean bowl,The bowl and hopper come apart easily.
+R153,PS-CAR-005,2026-07-22,5,Hiking with the cat,We go on short trails every weekend now.
+R154,PS-HAR-001,2026-07-22,4,Fits my border collie well,"Chest 52 cm, took the M, fits nicely with room to adjust."
+R155,PS-CAR-005,2026-07-24,1,Cat escaped,After two months the zipper split open at the vet and my cat got out.
+R156,PS-SCR-008,2026-07-24,4,Fine,Does the job.
+R157,PS-LIT-003,2026-07-26,5,No smell even with two cats,Flat is small and you can't smell the box at all.
+R158,PS-CAR-005,2026-07-28,5,Cat goes in by herself,She treats it like a cave.
+R159,PS-CAR-005,2026-07-28,5,Fast delivery,Came the next day.
+R160,PS-HAR-001,2026-07-29,5,Happy,"Good harness, good price."
+R161,PS-HAR-001,2026-07-30,3,Colour is different,"Ordered forest green, got something closer to grey. Works fine though."
+R162,PS-TOY-006,2026-07-31,5,Favourite toy,Carries it everywhere.
+R163,PS-TOY-006,2026-07-31,4,Good value,Cheaper than similar toys.
+R164,PS-SCR-008,2026-08-01,5,Tall enough,"80 cm is perfect, she can fully stretch."
+R165,PS-BED-002,2026-08-02,3,Too firm for my small dog,My 5 kg dog seems to prefer her old soft bed.
+R166,PS-HAR-001,2026-08-02,5,Vet recommended a harness,Vet said no more collar for his trachea. This one is great.
+R167,PS-FED-004,2026-08-03,2,App is unreliable,"Notifications stopped, then the feeder vanished from the app. Third time this month."
+R168,PS-FOD-007,2026-08-03,5,Love it,Great food.
+R169,PS-LIT-003,2026-08-06,2,Not for allergies,My partner has asthma and the dust when scooping makes it worse.
+R170,PS-FOD-007,2026-08-08,4,Dog eats it all,Bowl is empty every time.
+R171,PS-LIT-003,2026-08-08,1,Dust everywhere,Fine dust settles on the floor around the box and on the shelf above it. Not dust-free at all.
+R172,PS-TOY-006,2026-08-08,5,Fun for fetch,"Bounces in random directions, he loves chasing it."
+R173,PS-FED-004,2026-08-10,4,"Good feeder, flaky app","Cat is happy and gets fed on time. Only the app connection is flaky, reconnecting helps."
+R174,PS-LIT-003,2026-08-10,5,Good for a multi-cat home,"Three cats, one box, no smell."
+R175,PS-FED-004,2026-08-11,5,Great for my diabetic cat,"Small meals on a schedule, the vet is happy."
+R176,PS-FOD-007,2026-08-11,4,Good value for the quality,Fair price for what you get.
+R177,PS-HAR-001,2026-08-11,2,Runs at least one size small,"Measured my lab's chest twice, 78 cm, ordered L per the chart. Couldn't close the buckle. Had to send it back for an XL."
+R178,PS-CAR-005,2026-08-12,5,The window is a hit,She loves looking out of the bubble window.
+R179,PS-FOD-007,2026-08-12,1,Torn bag,"The bag was torn on one side, food exposed to air. Not acceptable for food."
+R180,PS-FED-004,2026-08-13,2,Reconnect every week,I have to reset it and pair it again every week. Our router is right next to it.
+R181,PS-HAR-001,2026-08-14,4,D-ring could be bigger,"Works well, but the front ring is a bit small for our thick leash clip."
+R182,PS-CAR-005,2026-08-15,4,"Good backpack, check the zip","Very comfortable for hiking with my cat. The zip started splitting at the corner after a few months, I fixed it with pliers."
+R183,PS-LIT-003,2026-08-17,5,Easy to scoop,Clumps don't break apart.
+R184,PS-LIT-003,2026-08-19,5,Great value for money,Lasts longer than cheaper ones.
+R185,PS-HAR-001,2026-08-21,5,Easy to put on,"Step in, two buckles, done in 10 seconds. My old dog hates things going over his head, so this is perfect."
+R186,PS-FED-004,2026-08-22,3,"Works, app doesn't",Mechanics are great and portions are accurate. The app keeps saying 'device offline' though.
+R187,PS-TOY-006,2026-08-22,5,Floats,Great at the lake.
+R188,PS-TOY-006,2026-08-22,5,Great,Dog loves it.
+R189,PS-TOY-006,2026-08-22,5,Recommended,Would buy again.
+R190,PS-FED-004,2026-08-23,5,Great when we travel,Weekend trips are no problem now.
+R191,PS-FED-004,2026-08-24,5,Holds a lot,Fill it once a week.
+R192,PS-BED-002,2026-08-26,5,Real memory foam,Thick foam that doesn't flatten. Worth the money.
+R193,PS-FED-004,2026-08-27,1,Missed a feeding,The app lost connection while we were away and the evening meal didn't come out. Not ok for a feeder.
+R194,PS-HAR-001,2026-08-27,5,Excellent,Exactly what we needed for our young lab.
+R195,PS-LIT-003,2026-08-28,5,Lasts long,A 10 L bag lasts us almost a month with one cat.
+R196,PS-CAR-005,2026-08-31,2,Zip came off the track,The zip slider came off on one side. Can't close the front properly anymore.
+R197,PS-HAR-001,2026-08-31,5,Calmer walks,Less pulling means less stress for both of us.
+R198,PS-FOD-007,2026-09-01,5,Good ingredients,Real chicken first on the list.
+R199,PS-FOD-007,2026-09-01,2,Upset stomach,Diarrhoea for a few days when switching. Mix it in slowly.
+R200,PS-TOY-006,2026-09-01,5,Long-lasting,Two months and counting.
+R201,PS-BED-002,2026-09-03,5,Our greyhound approves,Bony dogs need this kind of foam.
+R202,PS-FED-004,2026-09-03,5,Accurate portions,"Weighed the portions, very consistent."
+R203,PS-SCR-008,2026-09-04,4,Solid,Well made.
+R204,PS-HAR-001,2026-09-05,2,Straps max out too early,The adjusters run out of length long before the girth range on the label. Disappointing for the price.
+R205,PS-HAR-001,2026-09-06,4,Solid build,Stitching looks strong and the buckles feel sturdy.
+R206,PS-HAR-001,2026-09-06,1,Too tight,Too tight under the legs even on the loosest setting. Left red marks after a walk.
+R207,PS-CAR-005,2026-09-07,5,Great for vet trips,Much easier than the old plastic box.
+R208,PS-CAR-005,2026-09-08,4,Lightweight,Easy to carry even when full.
+R209,PS-FOD-007,2026-09-09,2,Bag arrived torn,The 12 kg bag was ripped at the bottom and kibble was all over the delivery box.
+R210,PS-TOY-006,2026-09-10,2,Lasted two days,My pit bull chewed a chunk off on day two.
+R211,PS-BED-002,2026-09-11,3,Cover issue,foam is fantastic but the cover shrinks. had to buy a second cover from another shop
+R212,PS-SCR-008,2026-09-11,5,Great post,Tall and sturdy enough for our cat.
+R213,PS-BED-002,2026-09-12,4,Pricey but good,"Not cheap, but you can feel the quality of the foam."
+R214,PS-FOD-007,2026-09-12,5,My senior dog eats again,"She was losing interest in food, not anymore."
+R215,PS-FOD-007,2026-09-12,5,Subscription is handy,Never run out now.
+R216,PS-FED-004,2026-09-13,5,Sturdy,Our cat tried to knock it over and failed.
+R217,PS-FOD-007,2026-09-13,2,Spilled kibble,"The outer box was fine, but the bag inside was torn and about a third had spilled out."
+R218,PS-LIT-003,2026-09-14,5,Cat took to it right away,No transition needed.
+R219,PS-FED-004,2026-09-15,4,Lid lock works,The cat can't get into the hopper anymore.
+R220,PS-SCR-008,2026-09-16,2,Wobbles,"The base is too light, it tips when she scratches hard."
+R221,PS-TOY-006,2026-09-19,4,Good size,Right size for our medium dog.
+R222,PS-BED-002,2026-09-23,4,"Comfy, wash with care","Dog loves it. Tip: wash the cover cold and air dry it, mine shrank a bit the first time."
+R223,PS-BED-002,2026-09-23,4,Good bed,Comfortable and looks good.
+R224,PS-FED-004,2026-09-23,5,Great product,Makes mornings easier.
+R225,PS-SCR-008,2026-09-23,4,Looks good,"Neutral colour, fits our flat."
+R226,PS-BED-002,2026-09-24,3,"Great bed, terrible cover",My old lab sleeps so much better on it. But after one wash the cover is too small to get back on.
+R227,PS-SCR-008,2026-09-25,5,Cat approved,She ignores the furniture now.
+R228,PS-FED-004,2026-09-27,4,Nice design,Looks good in the kitchen.
+R229,PS-LIT-003,2026-09-29,4,"Good value, a bit dusty","Lasts long and clumps hard. Some dust when I fill the box, so I pour slowly."
+R230,PS-SCR-008,2026-09-29,5,Great,Exactly as described.
+R231,PS-LIT-003,2026-09-30,4,Nice texture,"Fine grains, soft on paws."
+R232,PS-FED-004,2026-10-02,5,Love the voice recording,She runs when she hears my voice.
+R233,PS-FOD-007,2026-10-02,5,Best food so far,"Tried many, this one works."
+R234,PS-BED-002,2026-10-03,5,Helped after surgery,Perfect for recovery after his knee operation.
+R235,PS-LIT-003,2026-10-05,5,"Hard clumps, easy cleaning",The box stays clean.
+R236,PS-LIT-003,2026-10-07,5,Best clumping I've used,"Rock-hard clumps, no smell. Yes, it's a bit dusty when pouring, but I don't mind."
+R237,PS-TOY-006,2026-10-07,5,Calms him down,Chewing it helps when he's anxious.
+R238,PS-TOY-006,2026-10-07,3,Dog ignored it,Not interested at all.
+R239,PS-LIT-003,2026-10-08,4,Works well,Does what it should.
+R240,PS-BED-002,2026-10-09,2,Don't wash the cover,It shrunk by a few centimetres on a gentle 30 degree cycle. Spent 20 minutes wrestling the foam back in.
+R241,PS-FOD-007,2026-10-09,5,Second bag,Will keep buying.
+R242,PS-CAR-005,2026-10-11,3,"Comfortable, weak zipper",Straps are comfy and the window is great. But the zipper already catches and separates.
+R243,PS-FOD-007,2026-10-11,5,"No grain, no allergy",His skin cleared up.
+R244,PS-SCR-008,2026-10-11,5,Daily use,Still looks new after a month.
+R245,PS-SCR-008,2026-10-11,5,Fine for my kitten,She climbs it all day.
+R246,PS-CAR-005,2026-10-13,4,Comfortable straps,"Padded straps, easy on the shoulders."
+R247,PS-LIT-003,2026-10-13,3,Pour carefully,"Works fine, but there's a film of white dust on everything near the box after a week."
+R248,PS-TOY-006,2026-10-13,5,Worth it,Best toy we've bought.
+R249,PS-HAR-001,2026-10-15,5,Reflective strips actually work,We walk late in winter and cars see us now. Very bright in headlights.
+R250,PS-CAR-005,2026-10-16,4,Chest strap is useful,Keeps it stable when walking.

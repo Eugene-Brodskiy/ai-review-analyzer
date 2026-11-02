@@ -1,0 +1,14 @@
+id,type,sku,accepted_themes,description,review_count,review_ids
+I1,planted_issue,PS-HAR-001,sizing_fit,Harness runs small: the size chart is off by about one size,9,R007|R035|R042|R066|R074|R085|R177|R204|R206
+I2,planted_issue,PS-BED-002,cleaning_washing|durability,Bed cover shrinks after washing at 30 °C as instructed,6,R003|R086|R211|R222|R226|R240
+I3,planted_issue,PS-LIT-003,dust,"Litter is dusty when pouring, despite the '99% dust-free' claim",8,R022|R091|R150|R169|R171|R229|R236|R247
+I4,planted_issue,PS-FED-004,app_connectivity,Feeder loses Wi-Fi / goes offline in the app,8,R020|R053|R082|R167|R173|R180|R186|R193
+I5,planted_issue,PS-CAR-005,durability|build_quality,Carrier zipper splits or comes off the track,7,R059|R060|R094|R155|R182|R196|R242
+I6,planted_issue,PS-FOD-007,packaging,Food bag arrives torn or punctured,6,R034|R083|R100|R179|R209|R217
+T1,trap,PS-SCR-008,build_quality,Scratching post wobbles (2 reviews),2,R147|R220
+T2,trap,PS-TOY-006,durability,Toy destroyed by a strong chewer (2 reviews),2,R013|R210
+T3,trap,PS-FED-004,noise,Feeder motor is loud (2 reviews),2,R112|R130
+T4,trap,PS-LIT-003,smell,Litter scent too strong (2 reviews),2,R012|R018
+T5,trap,PS-CAR-005,sizing_fit,Carrier too small for a big cat (2 reviews),2,R043|R129
+T6,trap,PS-FED-004,build_quality|ease_of_use,Large kibble jams the feeder (2 reviews),2,R016|R084
+T7,trap,PS-TOY-006,pet_acceptance,Dog not interested in the toy (2 reviews),2,R037|R238
